@@ -1,0 +1,186 @@
+[
+    {
+        "id": "02ebc3ae8175c25f",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0b6138ec6f2f9b5a",
+        "type": "inject",
+        "z": "02ebc3ae8175c25f",
+        "name": "Numero",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "40",
+        "payloadType": "num",
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "dade71ba6f221638"
+            ]
+        ]
+    },
+    {
+        "id": "4f5f76fb5e66e5f0",
+        "type": "function",
+        "z": "02ebc3ae8175c25f",
+        "name": "Funcion",
+        "func": "let resultado = msg.payload * 2;\nmsg.payload = `El número es mayor a 50. Resultado multiplicado: ${resultado}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "6147e04c46c13df0"
+            ]
+        ]
+    },
+    {
+        "id": "6147e04c46c13df0",
+        "type": "debug",
+        "z": "02ebc3ae8175c25f",
+        "name": "Salida de mensaje",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "dade71ba6f221638",
+        "type": "switch",
+        "z": "02ebc3ae8175c25f",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "50",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "50",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "4f5f76fb5e66e5f0"
+            ],
+            [
+                "aeed9d3cf2ab8cf3"
+            ]
+        ]
+    },
+    {
+        "id": "aeed9d3cf2ab8cf3",
+        "type": "function",
+        "z": "02ebc3ae8175c25f",
+        "name": "function 5",
+        "func": "msg.payload = `El número es menor o igual a 50. Valor original: ${msg.payload}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "5a2e7d0f35d2d1c2"
+            ]
+        ]
+    },
+    {
+        "id": "154afb5f2a5dac56",
+        "type": "change",
+        "z": "02ebc3ae8175c25f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Mensaje enviado desde un change",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 620,
+        "wires": [
+            [
+                "9b3c15317fea8a26"
+            ]
+        ]
+    },
+    {
+        "id": "9b3c15317fea8a26",
+        "type": "debug",
+        "z": "02ebc3ae8175c25f",
+        "name": "Salida de mensaje",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5a2e7d0f35d2d1c2",
+        "type": "debug",
+        "z": "02ebc3ae8175c25f",
+        "name": "Salida de mensaje",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 340,
+        "wires": []
+    }
+]
