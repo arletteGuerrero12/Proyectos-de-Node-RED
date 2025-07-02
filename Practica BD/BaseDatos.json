@@ -1,0 +1,171 @@
+[
+    {
+        "id": "f2f9a9e1d3609abc",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c252b0a1a0a1cde4",
+        "type": "debug",
+        "z": "f2f9a9e1d3609abc",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "df756a92bbe9ca12",
+        "type": "mysql",
+        "z": "f2f9a9e1d3609abc",
+        "mydb": "2dd81fcf6ea9df99",
+        "name": "",
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "c252b0a1a0a1cde4"
+            ]
+        ]
+    },
+    {
+        "id": "46be01b47390ed7d",
+        "type": "function",
+        "z": "f2f9a9e1d3609abc",
+        "name": "function 6",
+        "func": "msg.topic = `INSERT INTO datos (Dato) VALUES ('${msg.payload}')`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "df756a92bbe9ca12"
+            ]
+        ]
+    },
+    {
+        "id": "02f5e06d4242d2b7",
+        "type": "inject",
+        "z": "f2f9a9e1d3609abc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hola mundo",
+        "payloadType": "str",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "46be01b47390ed7d"
+            ]
+        ]
+    },
+    {
+        "id": "b325ece54ac6453d",
+        "type": "function",
+        "z": "f2f9a9e1d3609abc",
+        "name": "function 7",
+        "func": "msg.topic = \"SELECT * FROM datos ORDER BY id DESC LIMIT 5\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 460,
+        "wires": [
+            [
+                "dd6b70b61c14561c"
+            ]
+        ]
+    },
+    {
+        "id": "26a746c266d0b2c1",
+        "type": "inject",
+        "z": "f2f9a9e1d3609abc",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 440,
+        "wires": [
+            [
+                "b325ece54ac6453d"
+            ]
+        ]
+    },
+    {
+        "id": "dd6b70b61c14561c",
+        "type": "mysql",
+        "z": "f2f9a9e1d3609abc",
+        "mydb": "2dd81fcf6ea9df99",
+        "name": "",
+        "x": 620,
+        "y": 500,
+        "wires": [
+            [
+                "b982f4ac3d86756c"
+            ]
+        ]
+    },
+    {
+        "id": "b982f4ac3d86756c",
+        "type": "debug",
+        "z": "f2f9a9e1d3609abc",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2dd81fcf6ea9df99",
+        "type": "MySQLdatabase",
+        "name": "nodered",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "nodered",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
